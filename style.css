@@ -65,13 +65,13 @@ button {
     text-shadow: 0px 0px 2px black;
 }
 
-.operator-button, .clear-button {
+.operator-button, #sqrt-button, #clear-button, #back-button {
     flex-grow: 0;
     flex-basis: 70px;
+    background-color: linen;
     border-radius: 50%;
     border: solid gray 2px;
     box-shadow: -3px 3px 2px #2b2453;
-    background-color: linen;
 }
 
 .equals-button {
