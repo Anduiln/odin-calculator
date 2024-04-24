@@ -28,13 +28,19 @@ function updateDisplay (event) {
     
     switch (buttonText) {
         case "±":
-            currentValue = -currentValue;
-            display.textContent = currentValue;
+            if (currentValue === "" && display.textContent !== currentValue) {
+                // check if current display is result of previous calculation
+                display.textContent = -display.textContent;
+                previousValue = display.textContent;
+            } else {
+                currentValue = -currentValue;
+                display.textContent = currentValue;
+            }
             break;
         case ".":
             if (currentValue.length > DISPLAY_SIZE) {
                 break;
-            } else if (display.textContent.includes(".")) {
+            } else if (currentValue.includes(".")) {
                 break;
             } else {
                 currentValue = currentValue + ".";
