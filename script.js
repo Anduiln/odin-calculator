@@ -66,7 +66,7 @@ function calculateOperation (event) {
         operation = (event.target.textContent === "=") ? "" : event.target.textContent;
     } else if (operation === "") {
         currentValue = "";
-        operation = event.target.textContent;
+        operation = (event.target.textContent === "=") ? "" : event.target.textContent;
     } else {
         display.textContent = 
                 roundToDisplaySize(operate(+previousValue, +currentValue, operation));
