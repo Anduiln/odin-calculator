@@ -10,7 +10,7 @@ body {
     flex-direction: column;
     gap: 10px;
     background-color: darkslateblue;
-    padding: 40px;
+    padding: 40px 25px;
     border-radius: 20px;
     border: solid darkslategray 3px;
     box-shadow: -5px 5px 2px darkslategray;
