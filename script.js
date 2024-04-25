@@ -141,7 +141,9 @@ function operate (a, b, operator) {
 function roundToDisplaySize(number) {
     let numberAsString = number.toString();
     let decimalPosition = numberAsString.indexOf(".");
-    if (decimalPosition === -1 && numberAsString.length > DISPLAY_SIZE) {
+    if (numberAsString.includes("e")) {
+        return number.toExponential(3);
+    } else if (decimalPosition === -1 && numberAsString.length > DISPLAY_SIZE) {
         return number.toExponential(3);
     } else if (decimalPosition !== -1 && numberAsString.length > DISPLAY_SIZE) {
         return number.toFixed(DISPLAY_SIZE - decimalPosition);
