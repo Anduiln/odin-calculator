@@ -1,6 +1,7 @@
 const DISPLAY_SIZE = 7;
 
 let display = document.querySelector("#display");
+let allButtons = document.querySelectorAll("button");
 let digitButtons = document.querySelectorAll(".number-button");
 let operatorButtons = document.querySelectorAll(".operator-button");
 let sqrtButton = document.querySelector("#sqrt-button");
@@ -22,6 +23,9 @@ for (let operator of operatorButtons) {
 sqrtButton.addEventListener("click", calculateSqrt);
 equalsButton.addEventListener("click", calculateOperation);
 clearButton.addEventListener("click", clearMemory);
+for (let button of allButtons) {
+    button.addEventListener("click", updatePrevious);
+}
 
 function updateDisplay (event) {
     let buttonText = event.target.textContent;
@@ -69,16 +73,19 @@ function calculateOperation (event) {
     if (previousValue === "" && operation === "") {
         previousValue = currentValue;
         currentValue = "";
-        operation = (event.target.textContent === "=") ? "" : event.target.textContent;
+        operation = (event.target.textContent === "=" || previousValue === "") ? 
+                                                        "" : event.target.textContent;
     } else if (operation === "") {
-        currentValue = "";
-        operation = (event.target.textContent === "=") ? "" : event.target.textContent;
-    } else {
-        display.textContent = 
-                roundToDisplaySize(operate(+previousValue, +currentValue, operation));
         previousValue = display.textContent;
         currentValue = "";
         operation = (event.target.textContent === "=") ? "" : event.target.textContent;
+    } else {
+        let result = roundToDisplaySize(operate(+previousValue, +currentValue, operation));
+        display.textContent = result;
+        previousValue = (result === "ERROR") ? "" : result;
+        currentValue = "";
+        operation = (result === "ERROR" || event.target.textContent === "=") ? 
+                                                        "" : event.target.textContent;
     }
 }
 
@@ -101,6 +108,10 @@ function clearMemory () {
     display.textContent = "0";
     previousValue = "";
     operation = "";
+}
+
+function updatePrevious () {
+    console.log(`${previousValue} ${operation}`)
 }
 
 
